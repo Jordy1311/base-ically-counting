@@ -11,46 +11,41 @@ import { Component } from '@angular/core';
 
     <main>
       <form>
-        <label for='base2'>Base 2</label>
+        <label for='2'>Base 2</label>
         <input
-          id='base2'
-          name='base2'
+          id='2'
           type='text'
           [value]='values[2]'
           (input)='updateValues($event)'
           >
 
-        <label for='base8'>Base 8</label>
+        <label for='8'>Base 8</label>
         <input
-          id='base8'
-          name='base8'
+          id='8'
           type='text'
           [value]='values[8]'
           (input)='updateValues($event)'
           >
 
-        <label for='base10'>Base 10</label>
+        <label for='10'>Base 10</label>
         <input
-          id='base10'
-          name='base10'
+          id='10'
           type='number'
           [value]='values[10]'
           (input)='updateValues($event)'
           >
 
-        <label for='base16'>Base 16</label>
+        <label for='16'>Base 16</label>
         <input
-          id='base16'
-          name='base16'
+          id='16'
           type='text'
           [value]='values[16]'
           (input)='updateValues($event)'
           >
 
-        <label for='base32'>Base 32</label>
+        <label for='32'>Base 32</label>
         <input
-          id='base32'
-          name='base32'
+          id='32'
           type='text'
           [value]='values[32]'
           (input)='updateValues($event)'
@@ -64,11 +59,12 @@ export class AppComponent {
   protected values = { 2: '', 8: '', 10: '', 16: '', 32: '' }
 
   updateValues(event: Event): void {
-    const target = event.target as HTMLInputElement;
-    const newValue = parseInt(target.value);
+    const formField = event.target as HTMLInputElement;
+    const formBase = parseInt(formField.id);
+    const formValueInBase10 = parseInt(formField.value, formBase);
 
     this.bases.forEach(base => {
-      const updatedValue = newValue.toString(base);
+      const updatedValue = formValueInBase10.toString(base);
 
       if (updatedValue === 'NaN') {
         this.values[base] = '';
