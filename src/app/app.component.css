@@ -38,4 +38,5 @@ input {
   font-weight: 400;
   padding-left: 8px;
   margin-bottom: 16px;
+  text-overflow: ellipsis;
 }

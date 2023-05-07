@@ -15,7 +15,8 @@ import { Component } from '@angular/core';
         <input
           id='2'
           type='text'
-          [value]='values[2]'
+          [value]='baseData[2].value'
+          (keypress)='validateCharacter($event)'
           (input)='updateValues($event)'
           >
 
@@ -23,7 +24,8 @@ import { Component } from '@angular/core';
         <input
           id='8'
           type='text'
-          [value]='values[8]'
+          [value]='baseData[8].value'
+          (keypress)='validateCharacter($event)'
           (input)='updateValues($event)'
           >
 
@@ -31,7 +33,8 @@ import { Component } from '@angular/core';
         <input
           id='10'
           type='number'
-          [value]='values[10]'
+          [value]='baseData[10].value'
+          (keypress)='validateCharacter($event)'
           (input)='updateValues($event)'
           >
 
@@ -39,7 +42,8 @@ import { Component } from '@angular/core';
         <input
           id='16'
           type='text'
-          [value]='values[16]'
+          [value]='baseData[16].value'
+          (keypress)='validateCharacter($event)'
           (input)='updateValues($event)'
           >
 
@@ -47,7 +51,8 @@ import { Component } from '@angular/core';
         <input
           id='32'
           type='text'
-          [value]='values[32]'
+          [value]='baseData[32].value'
+          (keypress)='validateCharacter($event)'
           (input)='updateValues($event)'
           >
       </form>
@@ -56,7 +61,26 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   private readonly bases: [2, 8, 10, 16, 32] = [2, 8, 10, 16, 32];
-  protected values = { 2: '', 8: '', 10: '', 16: '', 32: '' }
+  protected baseData = {
+    2: { value: '', regex: /[0-1]/g },
+    8: { value: '', regex: /[0-8]/g },
+    10: { value: '', regex: /[0-9]/g },
+    16: { value: '', regex: /[0-9A-Fa-f]/g },
+    32: { value: '', regex: /[0-9A-Va-v]/g },
+  };
+
+  validateCharacter(event: KeyboardEvent): boolean {
+    const formField = event.target as HTMLInputElement;
+    const formBase = parseInt(formField.id) as 2 | 8 | 10 | 16 | 32;
+    const eventCharacter = event.key;
+
+    if (eventCharacter.match(this.baseData[formBase].regex)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
+  }
 
   updateValues(event: Event): void {
     const formField = event.target as HTMLInputElement;
@@ -67,9 +91,9 @@ export class AppComponent {
       const updatedValue = formValueInBase10.toString(base);
 
       if (updatedValue === 'NaN') {
-        this.values[base] = '';
+        this.baseData[base].value = '';
       } else {
-        this.values[base] = updatedValue;
+        this.baseData[base].value = updatedValue;
       }
     });
   }
