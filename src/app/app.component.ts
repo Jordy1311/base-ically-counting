@@ -16,7 +16,7 @@ import { Component } from '@angular/core';
           id='base2'
           name='base2'
           type='text'
-          [value]='baseData[2]'
+          [value]='values[2]'
           (input)='updateValues($event)'
           >
 
@@ -25,7 +25,7 @@ import { Component } from '@angular/core';
           id='base8'
           name='base8'
           type='text'
-          [value]='baseData[8]'
+          [value]='values[8]'
           (input)='updateValues($event)'
           >
 
@@ -34,7 +34,7 @@ import { Component } from '@angular/core';
           id='base10'
           name='base10'
           type='number'
-          [value]='baseData[10]'
+          [value]='values[10]'
           (input)='updateValues($event)'
           >
 
@@ -43,7 +43,7 @@ import { Component } from '@angular/core';
           id='base16'
           name='base16'
           type='text'
-          [value]='baseData[16]'
+          [value]='values[16]'
           (input)='updateValues($event)'
           >
 
@@ -52,7 +52,7 @@ import { Component } from '@angular/core';
           id='base32'
           name='base32'
           type='text'
-          [value]='baseData[32]'
+          [value]='values[32]'
           (input)='updateValues($event)'
           >
       </form>
@@ -60,27 +60,21 @@ import { Component } from '@angular/core';
   `,
 })
 export class AppComponent {
-  private readonly baseSystems: [2, 8, 10, 16, 32] = [2, 8, 10, 16, 32];
-  protected baseData = {
-    2: '',
-    8: '',
-    10: '',
-    16: '',
-    32: '',
-  }
+  private readonly bases: [2, 8, 10, 16, 32] = [2, 8, 10, 16, 32];
+  protected values = { 2: '', 8: '', 10: '', 16: '', 32: '' }
 
   updateValues(event: Event): void {
     const target = event.target as HTMLInputElement;
     const newValue = parseInt(target.value);
 
-    this.baseSystems.forEach((base) => {
-      let updatedValue = newValue.toString(base);
+    this.bases.forEach(base => {
+      const updatedValue = newValue.toString(base);
 
       if (updatedValue === 'NaN') {
-        updatedValue = '';
+        this.values[base] = '';
+      } else {
+        this.values[base] = updatedValue;
       }
-
-      this.baseData[base] = updatedValue;
     });
   }
 }
