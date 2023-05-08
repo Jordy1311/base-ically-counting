@@ -11,50 +11,60 @@ import { Component } from '@angular/core';
 
     <main>
       <form>
-        <label for='2'>Base 2</label>
-        <input
-          id='2'
-          type='text'
-          [value]='baseData[2].value'
-          (keypress)='validateCharacter($event)'
-          (input)='updateValues($event)'
-          >
+        <div>
+          <label for='2'>Base 2</label>
+          <input
+            id='2'
+            type='text'
+            [value]='baseData[2].value'
+            (keypress)='validateCharacter($event)'
+            (input)='updateValues($event)'
+            >
+        </div>
 
-        <label for='8'>Base 8</label>
-        <input
-          id='8'
-          type='text'
-          [value]='baseData[8].value'
-          (keypress)='validateCharacter($event)'
-          (input)='updateValues($event)'
-          >
+        <div>
+          <label for='8'>Base 8</label>
+          <input
+            id='8'
+            type='text'
+            [value]='baseData[8].value'
+            (keypress)='validateCharacter($event)'
+            (input)='updateValues($event)'
+            >
+        </div>
 
-        <label for='10'>Base 10</label>
-        <input
-          id='10'
-          type='text'
-          [value]='baseData[10].value'
-          (keypress)='validateCharacter($event)'
-          (input)='updateValues($event)'
-          >
+        <div>
+          <label for='10'>Base 10</label>
+          <input
+            id='10'
+            type='text'
+            [value]='baseData[10].value'
+            (keypress)='validateCharacter($event)'
+            (input)='updateValues($event)'
+            >
+        </div>
 
-        <label for='16'>Base 16</label>
-        <input
-          id='16'
-          type='text'
-          [value]='baseData[16].value'
-          (keypress)='validateCharacter($event)'
-          (input)='updateValues($event)'
-          >
+        <div>
+          <label for='16'>Base 16</label>
+          <input
+            id='16'
+            type='text'
+            [value]='baseData[16].value'
+            (keypress)='validateCharacter($event)'
+            (input)='updateValues($event)'
+            >
+        </div>
 
-        <label for='32'>Base 32</label>
-        <input
-          id='32'
-          type='text'
-          [value]='baseData[32].value'
-          (keypress)='validateCharacter($event)'
-          (input)='updateValues($event)'
-          >
+        <div>
+          <label for='32'>Base 32</label>
+          <input
+            id='32'
+            type='text'
+            [value]='baseData[32].value'
+            (keypress)='validateCharacter($event)'
+            (input)='updateValues($event)'
+            >
+        </div>
       </form>
     </main>
   `,
@@ -90,7 +100,7 @@ export class AppComponent {
 
     setTimeout(() => {
       formField.classList.remove('error');
-    }, 100);
+    }, 150);
   }
 
   updateValues(event: Event): void {
