@@ -32,7 +32,7 @@ import { Component } from '@angular/core';
         <label for='10'>Base 10</label>
         <input
           id='10'
-          type='number'
+          type='text'
           [value]='baseData[10].value'
           (keypress)='validateCharacter($event)'
           (input)='updateValues($event)'
@@ -78,8 +78,19 @@ export class AppComponent {
       return true;
     } else {
       event.preventDefault();
+      this.flash(event);
       return false;
     }
+  }
+
+  flash(event: Event): void {
+    const formField = event.target as HTMLInputElement;
+
+    formField.classList.add('error');
+
+    setTimeout(() => {
+      formField.classList.remove('error');
+    }, 100);
   }
 
   updateValues(event: Event): void {
