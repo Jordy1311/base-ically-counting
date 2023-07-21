@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { baseData } from './baseData';
+
 @Component({
   selector: 'app-root',
   styleUrls: ['./app.component.css'],
@@ -11,56 +13,27 @@ import { Component } from '@angular/core';
 
     <main>
       <form>
-        <div>
-          <label for='2'>Base 2</label>
-          <input
-            id='2'
-            type='text'
-            [value]='baseData[2].value'
-            (keypress)='validateCharacter($event)'
-            (input)='updateValues($event)'
-            >
-        </div>
+        <span
+          class='material-symbols-outlined'
+          matTooltip='Enter a value to see its representation in other base systems'
+          matTooltipPosition='left'
+          aria-label='Help'
+          >
+          help
+        </span>
 
-        <div>
-          <label for='8'>Base 8</label>
-          <input
-            id='8'
-            type='text'
-            [value]='baseData[8].value'
-            (keypress)='validateCharacter($event)'
-            (input)='updateValues($event)'
+        <div *ngFor="let base of baseData">
+          <label
+            for='base.id'
+            matTooltip='Values: {{ base.possibleChars }}'
+            matTooltipPosition='right'
             >
-        </div>
-
-        <div>
-          <label for='10'>Base 10</label>
+            {{ base.name }}
+          </label>
           <input
-            id='10'
+            [id]='base.id'
             type='text'
-            [value]='baseData[10].value'
-            (keypress)='validateCharacter($event)'
-            (input)='updateValues($event)'
-            >
-        </div>
-
-        <div>
-          <label for='16'>Base 16</label>
-          <input
-            id='16'
-            type='text'
-            [value]='baseData[16].value'
-            (keypress)='validateCharacter($event)'
-            (input)='updateValues($event)'
-            >
-        </div>
-
-        <div>
-          <label for='32'>Base 32</label>
-          <input
-            id='32'
-            type='text'
-            [value]='baseData[32].value'
+            [value]='base.value'
             (keypress)='validateCharacter($event)'
             (input)='updateValues($event)'
             >
@@ -71,20 +44,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   private readonly bases: [2, 8, 10, 16, 32] = [2, 8, 10, 16, 32];
-  protected baseData = {
-    2: { value: '', regex: /[0-1]/g },
-    8: { value: '', regex: /[0-8]/g },
-    10: { value: '', regex: /[0-9]/g },
-    16: { value: '', regex: /[0-9A-Fa-f]/g },
-    32: { value: '', regex: /[0-9A-Va-v]/g },
-  };
+  protected baseData = baseData;
 
   validateCharacter(event: KeyboardEvent): boolean {
     const formField = event.target as HTMLInputElement;
-    const formBase = parseInt(formField.id) as 2 | 8 | 10 | 16 | 32;
+    const formBaseDataIndex = baseData.findIndex(baseData => baseData.id === formField.id);
     const eventCharacter = event.key;
 
-    if (eventCharacter.match(this.baseData[formBase].regex)) {
+    if (eventCharacter.match(this.baseData[ formBaseDataIndex ].regex)) {
       return true;
     } else {
       event.preventDefault();
@@ -93,6 +60,7 @@ export class AppComponent {
     }
   }
 
+  // make work better?
   flash(event: Event): void {
     const formField = event.target as HTMLInputElement;
 
@@ -109,12 +77,14 @@ export class AppComponent {
     const formValueInBase10 = parseInt(formField.value, formBase);
 
     this.bases.forEach(base => {
+      const baseDataIndex = baseData.findIndex(baseData => baseData.id === base.toString());
       const updatedValue = formValueInBase10.toString(base);
 
       if (updatedValue === 'NaN') {
-        this.baseData[base].value = '';
+        // there is no value in form field
+        this.baseData[ baseDataIndex ].value = '';
       } else {
-        this.baseData[base].value = updatedValue;
+        this.baseData[ baseDataIndex ].value = updatedValue;
       }
     });
   }
