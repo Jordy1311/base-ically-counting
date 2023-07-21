@@ -22,7 +22,7 @@ import { baseData } from './baseData';
           help
         </span>
 
-        <div *ngFor="let base of baseData">
+        <div class="form-field" *ngFor="let base of baseData">
           <label
             for='base.id'
             matTooltip='Values: {{ base.possibleChars }}'
