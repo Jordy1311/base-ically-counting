@@ -27,6 +27,7 @@ import { baseData } from './baseData';
             for='base.id'
             matTooltip='Values: {{ base.possibleChars }}'
             matTooltipPosition='right'
+            [ngClass]="base.id === '10' ? 'bold' : ''"
             >
             {{ base.name }}
           </label>
