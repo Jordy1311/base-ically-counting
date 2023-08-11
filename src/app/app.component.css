@@ -100,6 +100,7 @@ input {
 /* small tablets / mobile */
 @media only screen and (max-width: 768px) {
   :host {
+    margin-top: 50px;
     height: auto;
     width: 80vw;
     flex-direction: column;
