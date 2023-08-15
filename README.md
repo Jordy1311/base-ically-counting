@@ -14,7 +14,7 @@ You can follow the instructions below to run it locally or you can visit it here
 
 2. Run `npm ci`
 
-3. Run `ng serve --open`
+3. Run `npm start`
 
 _Note: this starts a development server so changes to the code should reflect instantly to the browser_
 
