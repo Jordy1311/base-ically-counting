@@ -1,27 +1,21 @@
-# BaseIcallyCounting
+# Base-ically-counting
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4.
+A very simple web-app to explore counting in different bases (or number systems).
 
-## Development server
+This very simple web-app consists of inputs for each of the major number systems / bases. Using the correct digits that correspond to the chosen base, you can enter a number and see it's representation in the other bases live (ie: without having to submit a form...).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Story goes, I was working with colours in CSS and a question came up in my team around how many colour values there are between RGB vs. HEX. I wanted to demonstrate that there are the same but couldn't find an app online that would allow me to count in different bases without having to submit a form. So, I created base-ically-counting. It's also allowed me to practice creating and deploying apps 😊
 
-## Code scaffolding
+You can follow the instructions below to run it locally or you can visit it here: https://base-ically-counting.web.app
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Running locally
 
-## Build
+1. Pull this repo and navigate within
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+2. Run `npm ci`
 
-## Running unit tests
+3. Run `ng serve --open`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+_Note: this starts a development server so changes to the code should reflect instantly to the browser_
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Happy hacking 👋
